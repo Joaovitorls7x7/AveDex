@@ -59,32 +59,47 @@ def pausar():
 
 
 catalogo_aves = [
-{
-"codigo": "1",
-"nome_popular": "Bem-te-vi",
-"nome_cientifico": "Pitangus sulphuratus",
-"habitat": "Áreas abertas, cidades e bordas de florestas",
-"alimentacao": "Insetos, frutos e pequenos animais",
-"curiosidade": "Seu canto lembra a expressão bem-te-vi."
-},
-{
-"codigo": "2",
-"nome_popular": "Canário-da-terra",
-"nome_cientifico": "Sicalis flaveola",
-"habitat": "Campos, áreas abertas e ambientes rurais",
-"alimentacao": "Sementes e pequenos insetos",
-"curiosidade": "O macho possui plumagem amarela intensa."
-},
-{
-"codigo": "3",
-"nome_popular": "João-de-barro",
-"nome_cientifico": "Furnarius rufus",
-"habitat": "Campos, cidades e áreas rurais",
-"alimentacao": "Insetos e outros pequenos invertebrados",
-"curiosidade": "Constrói um ninho de barro característico."
-}
+    {
+        "codigo": "1",
+        "nome_popular": "Bem-te-vi",
+        "nome_cientifico": "Pitangus sulphuratus",
+        "habitat": "Áreas abertas, cidades e bordas de florestas",
+        "alimentacao": "Insetos, frutos e pequenos animais",
+        "curiosidade": "Seu canto lembra a expressão bem-te-vi."
+    },
+    {
+        "codigo": "2",
+        "nome_popular": "Canário-da-terra",
+        "nome_cientifico": "Sicalis flaveola",
+        "habitat": "Campos, áreas abertas e ambientes rurais",
+        "alimentacao": "Sementes e pequenos insetos",
+        "curiosidade": "O macho possui plumagem amarela intensa."
+    },
+    {
+        "codigo": "3",
+        "nome_popular": "João-de-barro",
+        "nome_cientifico": "Furnarius rufus",
+        "habitat": "Campos, cidades e áreas rurais",
+        "alimentacao": "Insetos e outros pequenos invertebrados",
+        "curiosidade": "Constrói um ninho de barro característico."
+    },
+    {  
+        "codigo": "4",  
+        "nome_popular": "Carcará.",
+        "nome_cientifico": "Carcara plancus.",
+        "habitat": "Campos, cerrados, caatinga e áreas rurais.",
+        "alimentacao": "Animais vivos, carcaça, restos de lixo humano, insetos e frutos.",
+        "curiosidade": "Alguns indivíduos da espécie podem nascer com plumagem leucística."
+    },
+    {
+        "codigo": "5",  
+        "nome_popular": "Ararinha-azul.",
+        "nome_cientifico": "Cyanopsitta spixii.",
+        "habitat": "Caatinga seca, florestas ciliares abertas.",
+        "alimentacao": "Frutos e sementes.",
+        "curiosidade": "Infelizmente devido a destruição da Caatinga, atualmente a espécie é considerada extinta da natureza."
+    }
 ]
-
 
 
 exibir_linha()
