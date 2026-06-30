@@ -19,8 +19,8 @@ Boas Práticas de Programação.
 - [x] Encerramento do programa
 
 ## Fontes dos dados
-- WikiAves(carcará): endereço consultado
-- WikiAves(Ararinha-azul): endereço consultado
+- WikiAves(carcará): https://www.wikiaves.com.br/wiki/carcara
+- WikiAves(Ararinha-azul): https://www.wikiaves.com.br/wiki/ararinha-azul 
 
 ## Evolução do projeto
 Nesta versão, as aves foram organizadas em uma lista de
