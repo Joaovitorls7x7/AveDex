@@ -1,6 +1,10 @@
+# ==========================================
+# FUNÇÕES DE INTERFACE E UTILITÁRIOS
+# ==========================================
 
 def exibir_linha():
     print("=" * 40)
+
 
 def exibir_menu():
     print()
@@ -10,13 +14,55 @@ def exibir_menu():
     print("1 - Ver mensagem de boas-vindas")
     print("2 - Listar aves")
     print("3 - Ver detalhes de uma ave")
-    print("4 - Sobre a AveDex")
+    print("4 - Buscar ave por nome")  # <--- OPÇÃO ADICIONADA AO PRINT DO MENU
+    print("5 - Sobre a AveDex")
     print("0 - Sair")
+
 
 def mostrar_boas_vindas(nome_usuario):
     print(f"Olá, {nome_usuario}!")
     print("Seja bem-vindo(a) à AveDex.")
     print("Aqui vamos conhecer aves e praticar boas práticas.")
+
+
+def mostrar_curiosidade():
+    print("Curiosidade:")
+    print("Muitas aves ajudam no equilíbrio ambiental ao dispersar sementes.")
+
+
+def mostrar_sobre():
+    print("Sobre a AveDex:")
+    print("A AveDex é um catálogo interativo de aves.")
+
+
+def pausar():
+    input("\nPressione ENTER para voltar ao menu...")
+
+
+# ==========================================
+# FUNÇÕES DE BUSCA E LISTAGEM
+# ==========================================
+
+def buscar_aves_por_nome(catalogo, termo_busca):
+    # Criamos uma lista vazia para guardar as aves encontradas.
+    resultados = []
+    
+    # Percorremos cada ave cadastrada no catálogo.
+    for ave in catalogo:
+        # Convertemos o nome da ave para minúsculas.
+        # Isso evita diferença entre "Bem" e "bem".
+        nome = ave["nome_popular"].lower()
+        
+        # Também convertemos o termo digitado para minúsculas.
+        termo = termo_busca.lower()
+        
+        # O operador "in" verifica se um texto aparece dentro de outro.
+        if termo in nome:
+            resultados.append(ave)
+            
+    # Ao final, devolvemos a lista de aves encontradas.
+    return resultados
+
 
 def listar_aves(catalogo):
     print()
@@ -24,12 +70,12 @@ def listar_aves(catalogo):
     print("AVES CADASTRADAS")
     exibir_linha()
     for ave in catalogo:
-        print(f"{ave['codigo']} - {ave['nome_popular']}")
+        print(f"{ave['id']} - {ave['nome_popular']}")
 
 
 def buscar_ave_por_codigo(catalogo, codigo_procurado):
     for ave in catalogo:
-        if ave["codigo"] == codigo_procurado:
+        if str(ave["id"]) == str(codigo_procurado):
             return ave
     return None
 
@@ -46,55 +92,62 @@ def exibir_detalhes(ave):
     print(f"Curiosidade: {ave['curiosidade']}")
 
 
-def mostrar_curiosidade():
-    print("Curiosidade:")
-    print("Muitas aves ajudam no equilíbrio ambiental ao dispersar sementes.")
-
-def mostrar_sobre():
-    print("Sobre a AveDex:")
-    print("A AveDex será um catálogo interativo de aves.")
-
-def pausar():
-    input("\nPressione ENTER para voltar ao menu...")
-
+# ==========================================
+# BASE DE DADOS (CATÁLOGO)
+# ==========================================
 
 catalogo_aves = [
     {
-        "codigo": "1",
+        "id": 1,
         "nome_popular": "Bem-te-vi",
         "nome_cientifico": "Pitangus sulphuratus",
+        "ordem": "Passeriformes",
+        "familia": "Tyrannidae",
+        "dieta_tipo": "Onívora",
         "habitat": "Áreas abertas, cidades e bordas de florestas",
         "alimentacao": "Insetos, frutos e pequenos animais",
-        "curiosidade": "Seu canto lembra a expressão bem-te-vi."
+        "curiosidade": "Seu canto parece dizer o próprio nome."
     },
     {
-        "codigo": "2",
-        "nome_popular": "Canário-da-terra",
-        "nome_cientifico": "Sicalis flaveola",
-        "habitat": "Campos, áreas abertas e ambientes rurais",
-        "alimentacao": "Sementes e pequenos insetos",
-        "curiosidade": "O macho possui plumagem amarela intensa."
-    },
-    {
-        "codigo": "3",
+        "id": 2,
         "nome_popular": "João-de-barro",
         "nome_cientifico": "Furnarius rufus",
+        "ordem": "Passeriformes",
+        "familia": "Furnariidae",
+        "dieta_tipo": "Insetívora",
         "habitat": "Campos, cidades e áreas rurais",
-        "alimentacao": "Insetos e outros pequenos invertebrados",
-        "curiosidade": "Constrói um ninho de barro característico."
+        "alimentacao": "Insetos e outros invertebrados",
+        "curiosidade": "É conhecido por construir ninhos de barro."
     },
-    {  
-        "codigo": "4",  
-        "nome_popular": "Carcará.",
-        "nome_cientifico": "Carcara plancus.",
+    {
+        "id": 3,
+        "nome_popular": "Canário-da-terra",
+        "nome_cientifico": "Sicalis flaveola",
+        "ordem": "Passeriformes",
+        "familia": "Thraupidae",
+        "dieta_tipo": "Granívora",
+        "habitat": "Campos e áreas abertas",
+        "alimentacao": "Sementes e pequenos insetos",
+        "curiosidade": "Possui canto forte e melodioso."
+    },
+    {
+        "id": 4,
+        "nome_popular": "Carcará",
+        "nome_cientifico": "Caracara plancus",
+        "ordem": "Falconiformes",
+        "familia": "Falconidae",
+        "dieta_tipo": "Onívora / Necrófaga",
         "habitat": "Campos, cerrados, caatinga e áreas rurais.",
         "alimentacao": "Animais vivos, carcaça, restos de lixo humano, insetos e frutos.",
         "curiosidade": "Alguns indivíduos da espécie podem nascer com plumagem leucística."
     },
     {
-        "codigo": "5",  
-        "nome_popular": "Ararinha-azul.",
-        "nome_cientifico": "Cyanopsitta spixii.",
+        "id": 5,
+        "nome_popular": "Ararinha-azul",
+        "nome_cientifico": "Cyanopsitta spixii",
+        "ordem": "Psittaciformes",
+        "familia": "Psittacidae",
+        "dieta_tipo": "Granívora",
         "habitat": "Caatinga seca, florestas ciliares abertas.",
         "alimentacao": "Frutos e sementes.",
         "curiosidade": "Infelizmente devido a destruição da Caatinga, atualmente a espécie é considerada extinta da natureza."
@@ -102,23 +155,22 @@ catalogo_aves = [
 ]
 
 
+# ==========================================
+# FLUXO PRINCIPAL DO PROGRAMA
+# ==========================================
+
 exibir_linha()
 print("                    AVEDEX")
 exibir_linha()
-
 
 nome_usuario = input("Digite seu nome: ").strip()
 
 opcao_menu = ""
 
-
-
-
 while opcao_menu != "0":
     exibir_menu() 
     opcao_menu = input("Escolha uma opção: ").strip()
     print()
-    
     
     if opcao_menu == "1":
         mostrar_boas_vindas(nome_usuario)
@@ -138,8 +190,20 @@ while opcao_menu != "0":
         else:
             print("Ave não encontrada. Confira o código informado.")
 
-
+    # <--- IF/ELIF PARA TRATAR A BUSCA POR NOME
     elif opcao_menu == "4":
+        termo = input("Digite o nome ou parte do nome da ave: ").strip()
+        resultados = buscar_aves_por_nome(catalogo_aves, termo)
+        
+        # IF que verifica se a busca retornou alguma ave
+        if resultados:
+            print(f"\n--- AVES ENCONTRADAS ({len(resultados)}) ---")
+            for ave in resultados:
+                print(f"ID {ave['id']} - {ave['nome_popular']} ({ave['nome_cientifico']})")
+        else:
+            print(f"\nNenhuma ave encontrada com o termo '{termo}'.")
+
+    elif opcao_menu == "5":
         mostrar_sobre()
     
     elif opcao_menu == "0":
@@ -147,7 +211,7 @@ while opcao_menu != "0":
         print(f"Até logo, {nome_usuario}!")
     
     else:
-        print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
+        print("Opção inválida. Digite apenas 0, 1, 2, 3, 4 ou 5.")
         
     if opcao_menu != "0":
         pausar()
