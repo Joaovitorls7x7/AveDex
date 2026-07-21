@@ -1,6 +1,24 @@
+import unicodedata
+
 # ==========================================
-# FUNÇÕES DE INTERFACE E UTILITÁRIOS
+# FUNÇÕES DE UTILITÁRIOS E NORMALIZAÇÃO
 # ==========================================
+
+def normalizar_texto(texto):
+    # Garante que o valor recebido será tratado como texto.
+    texto = str(texto)
+    # Converte para minúsculas e remove espaços no início e no final.
+    texto = texto.lower().strip()
+    # Separa as letras dos sinais de acentuação.
+    # Exemplo: "á" passa a ser tratado como "a" + acento.
+    texto = unicodedata.normalize("NFD", texto)
+    # Monta um novo texto removendo os sinais de acentuação.
+    texto = "".join(
+        caractere for caractere in texto
+        if unicodedata.category(caractere) != "Mn"
+    )
+    return texto
+
 
 def exibir_linha():
     print("=" * 40)
@@ -14,7 +32,7 @@ def exibir_menu():
     print("1 - Ver mensagem de boas-vindas")
     print("2 - Listar aves")
     print("3 - Ver detalhes de uma ave")
-    print("4 - Buscar ave por nome")  # <--- OPÇÃO ADICIONADA AO PRINT DO MENU
+    print("4 - Buscar ave por nome")
     print("5 - Sobre a AveDex")
     print("0 - Sair")
 
@@ -44,23 +62,18 @@ def pausar():
 # ==========================================
 
 def buscar_aves_por_nome(catalogo, termo_busca):
-    # Criamos uma lista vazia para guardar as aves encontradas.
     resultados = []
+    # Normalizamos o termo digitado pelo usuário (remove acentos e deixa minúsculo).
+    termo = normalizar_texto(termo_busca)
     
-    # Percorremos cada ave cadastrada no catálogo.
     for ave in catalogo:
-        # Convertemos o nome da ave para minúsculas.
-        # Isso evita diferença entre "Bem" e "bem".
-        nome = ave["nome_popular"].lower()
+        # Normalizamos também o nome cadastrado.
+        nome = normalizar_texto(ave["nome_popular"])
         
-        # Também convertemos o termo digitado para minúsculas.
-        termo = termo_busca.lower()
-        
-        # O operador "in" verifica se um texto aparece dentro de outro.
+        # O operador "in" verifica se o termo sem acento está dentro do nome sem acento.
         if termo in nome:
             resultados.append(ave)
             
-    # Ao final, devolvemos a lista de aves encontradas.
     return resultados
 
 
@@ -87,6 +100,9 @@ def exibir_detalhes(ave):
     exibir_linha()
     print(f"Nome popular: {ave['nome_popular']}")
     print(f"Nome científico: {ave['nome_cientifico']}")
+    print(f"Ordem: {ave['ordem']}")
+    print(f"Família: {ave['familia']}")
+    print(f"Dieta: {ave['dieta_tipo']}")
     print(f"Habitat: {ave['habitat']}")
     print(f"Alimentação: {ave['alimentacao']}")
     print(f"Curiosidade: {ave['curiosidade']}")
@@ -190,12 +206,10 @@ while opcao_menu != "0":
         else:
             print("Ave não encontrada. Confira o código informado.")
 
-    # <--- IF/ELIF PARA TRATAR A BUSCA POR NOME
     elif opcao_menu == "4":
         termo = input("Digite o nome ou parte do nome da ave: ").strip()
         resultados = buscar_aves_por_nome(catalogo_aves, termo)
         
-        # IF que verifica se a busca retornou alguma ave
         if resultados:
             print(f"\n--- AVES ENCONTRADAS ({len(resultados)}) ---")
             for ave in resultados:
