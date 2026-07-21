@@ -1,53 +1,19 @@
 import unicodedata
 
 # ==========================================
-# FUNÇÕES DE UTILITÁRIOS E NORMALIZAÇÃO
+# 1. FUNÇÕES DE UTILITÁRIOS E NORMALIZAÇÃO
 # ==========================================
 
-
-def buscar_aves(catalogo, termo_busca):
-    # Lista que receberá todas as aves encontradas.
-    resultados = []
-    
-    # Normalizamos o termo digitado uma única vez.
-    termo = normalizar_texto(termo_busca)
-    
-    # Percorremos todas as aves do catálogo.
-    for ave in catalogo:
-        # Separamos os campos em que a busca será feita.
-        # Usamos get() para evitar erro caso alguma chave esteja ausente.
-        campos_busca = [
-            ave.get("nome_popular", ""),
-            ave.get("nome_cientifico", ""),
-            ave.get("familia", ""),
-            ave.get("ordem", ""),
-            ave.get("dieta_tipo", "")
-        ]
-        
-        # Juntamos todos os campos em um único texto.
-        # Assim, a busca pode procurar em todos eles de uma vez.
-        texto_busca = " ".join(campos_busca)
-        
-        # Normalizamos o texto completo da ave.
-        texto_busca = normalizar_texto(texto_busca)
-        
-        # Se o termo digitado estiver no texto da ave,
-        # adicionamos essa ave aos resultados.
-        if termo in texto_busca:
-            resultados.append(ave)
-            
-    return resultados
-
-
 def normalizar_texto(texto):
-    # Garante que o valor recebido será tratado como texto.
+    """
+    Remove acentos, converte o texto para minúsculas e remove espaços extras.
+    Isso permite buscar 'canário' digitando 'canario', por exemplo.
+    """
     texto = str(texto)
-    # Converte para minúsculas e remove espaços no início e no final.
     texto = texto.lower().strip()
-    # Separa as letras dos sinais de acentuação.
-    # Exemplo: "á" passa a ser tratado como "a" + acento.
+    # Decompõe os caracteres acentuados (NFD separa a letra do acento)
     texto = unicodedata.normalize("NFD", texto)
-    # Monta um novo texto removendo os sinais de acentuação.
+    # Filtra mantendo apenas os caracteres que não são marcas de acentuação ('Mn')
     texto = "".join(
         caractere for caractere in texto
         if unicodedata.category(caractere) != "Mn"
@@ -56,63 +22,57 @@ def normalizar_texto(texto):
 
 
 def exibir_linha():
-    print("=" * 40)
-
-
-def exibir_menu():
-    print()
-    exibir_linha()
-    print("                MENU PRINCIPAL")
-    exibir_linha()
-    print("1 - Ver mensagem de boas-vindas")
-    print("2 - Listar aves")
-    print("3 - Ver detalhes de uma ave")
-    print("4 - Buscar ave por nome")
-    print("5 - Sobre a AveDex")
-    print("0 - Sair")
-
-
-def mostrar_boas_vindas(nome_usuario):
-    print(f"Olá, {nome_usuario}!")
-    print("Seja bem-vindo(a) à AveDex.")
-    print("Aqui vamos conhecer aves e praticar boas práticas.")
-
-
-def mostrar_curiosidade():
-    print("Curiosidade:")
-    print("Muitas aves ajudam no equilíbrio ambiental ao dispersar sementes.")
-
-
-def mostrar_sobre():
-    print("Sobre a AveDex:")
-    print("A AveDex é um catálogo interativo de aves.")
+    """Imprime uma linha divisória visual para organização da interface."""
+    print("=" * 50)
 
 
 def pausar():
+    """Pausa a execução até o usuário pressionar ENTER, evitando que a tela limpe rapidamente."""
     input("\nPressione ENTER para voltar ao menu...")
 
 
 # ==========================================
-# FUNÇÕES DE BUSCA E LISTAGEM
+# 2. FUNÇÕES DE BUSCA E EXIBIÇÃO DE DADOS
 # ==========================================
 
-def buscar_aves_por_nome(catalogo, termo_busca):
+def buscar_aves(catalogo, termo_busca):
+    """
+    Percorre o catálogo e busca o termo digitado dentro de vários campos
+    (nome popular, nome científico, família, ordem e tipo de dieta).
+    """
     resultados = []
-    # Normalizamos o termo digitado pelo usuário (remove acentos e deixa minúsculo).
     termo = normalizar_texto(termo_busca)
     
     for ave in catalogo:
-        # Normalizamos também o nome cadastrado.
-        nome = normalizar_texto(ave["nome_popular"])
+        # Reúne os campos selecionados para a busca
+        campos_busca = [
+            ave.get("nome_popular", ""),
+            ave.get("nome_cientifico", ""),
+            ave.get("familia", ""),
+            ave.get("ordem", ""),
+            ave.get("dieta_tipo", "")
+        ]
         
-        # O operador "in" verifica se o termo sem acento está dentro do nome sem acento.
-        if termo in nome:
+        # Junta todos os campos em uma única string e normaliza
+        texto_busca = normalizar_texto(" ".join(campos_busca))
+        
+        # Se o termo procurado estiver dentro do texto da ave, adiciona aos resultados
+        if termo in texto_busca:
             resultados.append(ave)
             
     return resultados
 
 
+def buscar_ave_por_codigo(catalogo, codigo_procurado):
+    """Procura uma ave específica dentro de uma lista utilizando o seu ID/código."""
+    for ave in catalogo:
+        if str(ave["id"]) == str(codigo_procurado):
+            return ave
+    return None
+
+
 def listar_aves(catalogo):
+    """Exibe uma lista simplificada com o ID e o Nome Popular de todas as aves do catálogo."""
     print()
     exibir_linha()
     print("AVES CADASTRADAS")
@@ -121,14 +81,8 @@ def listar_aves(catalogo):
         print(f"{ave['id']} - {ave['nome_popular']}")
 
 
-def buscar_ave_por_codigo(catalogo, codigo_procurado):
-    for ave in catalogo:
-        if str(ave["id"]) == str(codigo_procurado):
-            return ave
-    return None
-
-
 def exibir_detalhes(ave):
+    """Exibe na tela todas as informações detalhadas de uma única ave."""
     print()
     exibir_linha()
     print("DETALHES DA AVE")
@@ -143,10 +97,85 @@ def exibir_detalhes(ave):
     print(f"Curiosidade: {ave['curiosidade']}")
 
 
+def exibir_resultados_busca(resultados):
+    """Formata e imprime a lista de aves encontradas após realizar uma pesquisa."""
+    print()
+    exibir_linha()
+    print("RESULTADOS DA BUSCA")
+    exibir_linha()
+    
+    if len(resultados) == 0:
+        print("Nenhuma ave encontrada.")
+    else:
+        for ave in resultados:
+            print(
+                f"{ave['id']} - {ave['nome_popular']} "
+                f"({ave['familia']}, {ave['dieta_tipo']})"
+            )
+
+
 # ==========================================
-# BASE DE DADOS (CATÁLOGO)
+# 3. INTERFACE E NAVEGAÇÃO DE TELAS
 # ==========================================
 
+def exibir_menu():
+    """Exibe o menu principal com o cabeçalho e as opções atualizadas."""
+    print()
+    print("=" * 50)
+    print("AVEDEX - MENU PRINCIPAL")
+    print("=" * 50)
+    print("1 - Listar aves")
+    print("2 - Buscar ave")
+    print("3 - Ver detalhes de uma ave")
+    print("4 - Sobre a AveDex")
+    print("0 - Sair")
+
+
+def selecionar_ave_por_id(catalogo):
+    """
+    Função auxiliar para a Opção 3 do menu:
+    Lista as aves disponíveis, pede o ID ao usuário e exibe os detalhes.
+    """
+    listar_aves(catalogo)
+    codigo_escolhido = input("\nDigite o ID/código da ave para ver detalhes: ").strip()
+    ave_encontrada = buscar_ave_por_codigo(catalogo, codigo_escolhido)
+    
+    if ave_encontrada is not None:
+        exibir_detalhes(ave_encontrada)
+    else:
+        print("Ave não encontrada. Confira o código informado.")
+
+
+def tela_busca(catalogo):
+    """
+    Gerencia a tela de pesquisa: pede o termo, faz a busca,
+    exibe os resultados e permite abrir o detalhamento direto pelo ID.
+    """
+    termo = input("Digite parte do nome, família, ordem ou dieta: ").strip()
+    
+    if termo == "":
+        print("Digite algum texto para realizar a busca.")
+        return
+        
+    resultados = buscar_aves(catalogo, termo)
+    exibir_resultados_busca(resultados)
+    
+    # Se houver resultados, oferece a opção de abrir os detalhes diretamente
+    if len(resultados) > 0:
+        escolha = input("\nDigite o ID para ver detalhes ou ENTER para voltar: ").strip()
+        if escolha != "":
+            ave_encontrada = buscar_ave_por_codigo(resultados, escolha)
+            if ave_encontrada is None:
+                print("ID não encontrado nos resultados.")
+            else:
+                exibir_detalhes(ave_encontrada)
+
+
+# ==========================================
+# 4. BASE DE DADOS (CATÁLOGO EM MEMÓRIA)
+# ==========================================
+
+# Estrutura de dados contendo o banco de informações das aves (Lista de Dicionários)
 catalogo_aves = [
     {
         "id": 1,
@@ -207,60 +236,42 @@ catalogo_aves = [
 
 
 # ==========================================
-# FLUXO PRINCIPAL DO PROGRAMA
+# 5. FLUXO PRINCIPAL DO PROGRAMA
 # ==========================================
 
+# Mensagem inicial ao abrir o programa
 exibir_linha()
 print("                    AVEDEX")
 exibir_linha()
 
-nome_usuario = input("Digite seu nome: ").strip()
-
 opcao_menu = ""
 
+# Laço principal que mantém o menu ativo até que a opção "0" seja digitada
 while opcao_menu != "0":
     exibir_menu() 
     opcao_menu = input("Escolha uma opção: ").strip()
     print()
     
+    # Processa a opção informada pelo usuário
     if opcao_menu == "1":
-        mostrar_boas_vindas(nome_usuario)
-    
+        listar_aves(catalogo_aves)
+        
     elif opcao_menu == "2":
-        listar_aves(catalogo_aves)
-    
+        tela_busca(catalogo_aves)
+        
     elif opcao_menu == "3":
-        listar_aves(catalogo_aves)
-        codigo_escolhido = input("\nDigite o código da ave: ").strip()
-        ave_encontrada = buscar_ave_por_codigo(
-            catalogo_aves,
-            codigo_escolhido
-        )
-        if ave_encontrada is not None:
-            exibir_detalhes(ave_encontrada)
-        else:
-            print("Ave não encontrada. Confira o código informado.")
-
+        selecionar_ave_por_id(catalogo_aves)
+        
     elif opcao_menu == "4":
-        termo = input("Digite o nome ou parte do nome da ave: ").strip()
-        resultados = buscar_aves_por_nome(catalogo_aves, termo)
+        print("A AveDex é um catálogo interativo de aves.")
+        print("Em breve, teremos comparação, imagens, sons e dados em arquivo JSON.")
         
-        if resultados:
-            print(f"\n--- AVES ENCONTRADAS ({len(resultados)}) ---")
-            for ave in resultados:
-                print(f"ID {ave['id']} - {ave['nome_popular']} ({ave['nome_cientifico']})")
-        else:
-            print(f"\nNenhuma ave encontrada com o termo '{termo}'.")
-
-    elif opcao_menu == "5":
-        mostrar_sobre()
-    
     elif opcao_menu == "0":
-        print("Encerrando a AveDex.")
-        print(f"Até logo, {nome_usuario}!")
-    
-    else:
-        print("Opção inválida. Digite apenas 0, 1, 2, 3, 4 ou 5.")
+        print("Encerrando a AveDex. Até logo!")
         
+    else:
+        print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
+        
+    # Se o usuário não escolheu sair, faz uma pausa antes de redesenhar o menu
     if opcao_menu != "0":
         pausar()
