@@ -4,6 +4,18 @@ import unicodedata
 # 1. FUNÇÕES DE UTILITÁRIOS E NORMALIZAÇÃO
 # ==========================================
 
+
+def valor_ou_indisponivel(valor, unidade=""):
+    if valor is None or valor == "":
+        return "Não informado"
+    
+    if unidade != "":
+        return f"{valor} {unidade}"
+    
+    return str(valor)
+
+
+
 def normalizar_texto(texto):
     """
     Remove acentos, converte o texto para minúsculas e remove espaços extras.
