@@ -1,48 +1,53 @@
 # AveDex
-Catálogo interativo de aves desenvolvido na disciplina de
-Boas Práticas de Programação.
+Catálogo interativo de aves desenvolvido para a disciplina de Boas Práticas de Programação.
 
-## Funcionalidades atuais
-- menu em repetição;
-- mensagem personalizada;
-- apresentação inicial de uma ave;
-- tratamento de opção inválida.
-- criação de dicionários para o facilitamento do código
-- Criação do catálogo e a listagem
-- Funções de Buscar e mostrar detalhes criadas para facilitar a contrução do código
--  Buscar por nome, ordem, familia e dieta
-- Pesquisa de id dentro dos resultados de busca para ver detalhes sobre a avé
+O AveDex é um sistema em Python executado via linha de comando (CLI), projetado para catalogar, pesquisar, exibir detalhes biométricos e comparar informações ecológicas e taxonômicas de diversas espécies de aves.
 
-## Testes manuais realizados
-- [x] Listagem das aves
-- [x] Consulta de código existente
-- [x] Consulta de código inexistente
-- [x] Tratamento de opção inválida
-- [x] Encerramento do programa
+## Funcionalidades do Sistema
+- Menu de navegação contínuo (laço while) com tratamento para opções inválidas e encerramento seguro;
+- Listagem geral e simplificada de todas as espécies cadastradas no catálogo;
+- Sistema de busca inteligente por palavra-chave em múltiplos campos (nome popular, nome científico, família, ordem e dieta);
+- Normalização de texto automática que ignora diferenças entre letras maiúsculas/minúsculas e acentuação durante as pesquisas;
+- Exibição de ficha técnica completa com dados biométricos (comprimento e peso), habitat, dieta, curiosidades e índice de conservação;
+- Tratamento de dados ausentes para evitar erros de exibição quando alguma informação biométrica não estiver preenchida;
+- Tabela comparativa lado a lado entre duas aves para análise direta de atributos taxonômicos e ecológicos;
+- Validação de entradas do usuário para evitar travamentos ao digitar IDs inexistentes ou buscas em branco.
 
-## Testes manuais 2 realizados
-- [x] Busca por parte do nome popular
-- [x] Busca ignorando acentos
-- [x] Busca por família
-- [x] Busca por ordem
-- [x] Busca por dieta
-- [x] Busca sem resultados
-- [x] Busca com entrada vazia
-- [x] Tentativa de abrir ID fora dos resultados
+## Evolução e Arquitetura do Projeto
+Nesta versão, a aplicação passou por um processo de refatoração focado em modularização e organização de dados. O catálogo foi estruturado utilizando listas de dicionários chave-valor, permitindo manipular as informações ecológicas de forma limpa, segura e escalável.
 
-## Fontes dos dados
-- WikiAves(carcará): https://www.wikiaves.com.br/wiki/carcara
-- WikiAves(Ararinha-azul): https://www.wikiaves.com.br/wiki/ararinha-azul 
+## Testes Manuais Realizados
 
-## Evolução do projeto
-Nesta versão, as aves foram organizadas em uma lista de
-dicionários e as funcionalidades foram separadas em funções.
+### Módulo 1 — Navegação e Consulta Básica
+- [x] Listagem geral de aves cadastradas
+- [x] Consulta de detalhes por ID existente
+- [x] Consulta por ID inexistente ou fora do catálogo
+- [x] Tratamento de opção inválida no menu principal
+- [x] Encerramento correto e seguro do programa
 
+### Módulo 2 — Sistema de Busca e Normalização
+- [x] Busca parcial por nome popular
+- [x] Busca com tolerância à acentuação (ex: "canario" encontra "Canário-da-terra")
+- [x] Filtro de busca por família taxonômica
+- [x] Filtro de busca por ordem
+- [x] Filtro de busca por tipo de dieta
+- [x] Retorno amigável para consultas sem resultados
+- [x] Validação e bloqueio de entradas de busca em branco
+- [x] Tentativa de navegação por ID fora do escopo de resultados filtrados
 
-## Como executar
+### Módulo 3 — Comparação de Espécies
+- [x] Comparação estruturada entre duas aves distintas
+- [x] Exibição alinhada de família, dieta e habitat na tabela comparativa
+- [x] Comparação direta de dados biométricos (peso em gramas e comprimento em cm)
+- [x] Comparação de status e índice de conservação
+- [x] Validação de ID inexistente durante o fluxo de seleção para comparação
+- [x] Comparação de uma mesma ave com ela mesma
+- [x] Tratamento de opção inválida durante o fluxo do menu
+
+## Fontes dos Dados
+- WikiAves (Carcará): https://www.wikiaves.com.br/wiki/carcara
+- WikiAves (Ararinha-azul): https://www.wikiaves.com.br/wiki/ararinha-azul
+
+## Como Executar
 ```bash
 python avedex.py
-```
-
-## Autor
-João Vitor Lima Soares.
