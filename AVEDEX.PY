@@ -9,6 +9,26 @@ import unicodedata  # Biblioteca padrão usada para manipular e remover acentos 
 # CONSTANTES DE CONFIGURAÇÃO DO SISTEMA
 # ==========================================
 
+
+def linha(caractere="=", largura=LARGURA_TELA):
+    # Retorna uma linha formada pela repetição de um caractere.
+    return caractere * largura
+
+
+def titulo(texto):
+    # Exibe um título padronizado.
+    print()
+    print(linha("="))
+    print(texto)
+    print(linha("="))
+
+
+def mensagem_aviso(texto):
+    # Exibe uma mensagem simples de aviso.
+    print(f"[AVISO] {texto}")
+
+
+
 # Largura usada em títulos e linhas de separação.
 LARGURA_TELA = 78
 
@@ -106,14 +126,8 @@ def exibir_menu():
 
 
 def listar_aves(catalogo):
-    """
-    Percorre todo o catálogo fornecido e exibe apenas o ID numérico 
-    e o Nome Popular de cada ave cadastrada.
-    """
-    print()
-    print("=" * 50)
-    print("AVES CADASTRADAS")
-    print("=" * 50)
+    """Percorre todo o catálogo fornecido e exibe apenas o ID numérico e o Nome Popular de cada ave cadastrada."""
+    titulo("AVES CADASTRADAS")
     for ave in catalogo:
         print(f"{ave['id']} - {ave['nome_popular']}")
 
