@@ -101,6 +101,27 @@ def valor_ou_indisponivel(valor, unidade=""):
     return str(valor)
 
 
+def cortar_texto(texto, tamanho=25):
+    """
+    Limita o tamanho de uma string para evitar quebras visuais na interface.
+    Se o texto for maior que o limite ('tamanho'), ele é truncado e recebe 
+    reticências (...) ao final.
+    """
+    # Se o texto não existir, retornamos uma mensagem padrão.
+    if texto is None:
+        return "Não informado"
+        
+    # Garantimos que o valor será tratado como texto.
+    texto = str(texto).strip()
+    
+    # Se o texto já couber no tamanho definido, retornamos sem alteração.
+    if len(texto) <= tamanho:
+        return texto
+        
+    # Se for longo demais, cortamos e adicionamos reticências.
+    return texto[: tamanho - 3] + "..."
+
+
 # ==========================================
 # FUNÇÕES DE INTERFACE E EXIBIÇÃO DE MENUS
 # ==========================================
@@ -243,6 +264,23 @@ def imprimir_linha_comparacao(rotulo, valor_1, valor_2):
     print(f"{rotulo:<18} | {str(valor_1):<25} | {str(valor_2):<25}")
 
 
+def preparar_valor_comparacao(ave, campo, unidade):
+    """
+    Trata e formata o dado de uma ave especificamente para exibição na tabela.
+    Aplica truncamento (corte de texto) caso o campo analisado seja o 'habitat',
+    ou formata com unidade de medida caso seja um campo padrão.
+    """
+    # Busca o valor original da ave.
+    valor = ave.get(campo)
+    
+    # Habitat costuma ser longo, então cortamos para não quebrar a tabela.
+    if campo == "habitat":
+        return cortar_texto(valor, 25)
+        
+    # Os demais campos usam a função padrão.
+    return valor_ou_indisponivel(valor, unidade)
+
+
 def exibir_comparacao_aves(ave_1, ave_2):
     """Monta uma tabela comparando dinamicamente as duas aves selecionadas."""
     print()
@@ -252,14 +290,15 @@ def exibir_comparacao_aves(ave_1, ave_2):
 
     imprimir_linha_comparacao(
         "Campo",
-        ave_1["nome_popular"],
-        ave_2["nome_popular"]
+        cortar_texto(ave_1["nome_popular"], 25),
+        cortar_texto(ave_2["nome_popular"], 25)
     )
     print(linha("-", LARGURA_TELA))
 
+    # Percorre cada regra de comparação e trata o valor individualmente.
     for rotulo, campo, unidade in CAMPOS_COMPARACAO:
-        valor_1 = valor_ou_indisponivel(ave_1.get(campo), unidade)
-        valor_2 = valor_ou_indisponivel(ave_2.get(campo), unidade)
+        valor_1 = preparar_valor_comparacao(ave_1, campo, unidade)
+        valor_2 = preparar_valor_comparacao(ave_2, campo, unidade)
         imprimir_linha_comparacao(rotulo, valor_1, valor_2)
 
 
