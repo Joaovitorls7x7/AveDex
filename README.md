@@ -12,10 +12,13 @@ O AveDex é um sistema em Python executado via linha de comando (CLI), projetado
 - Tratamento de dados ausentes para evitar erros de exibição quando alguma informação biométrica não estiver preenchida;
 - Tabela comparativa lado a lado entre duas aves para análise direta de atributos taxonômicos e ecológicos;
 - Aviso em tela ao selecionar a mesma ave para ambos os lados na comparação;
+- Sistema de padronização de mensagens no console (mensagens de aviso/alerta e mensagens de confirmação/sucesso);
 - Validação de entradas do usuário para evitar travamentos ao digitar IDs inexistentes ou buscas em branco.
 
 ## Evolução e Arquitetura do Projeto
-Nesta versão, a aplicação passou por um processo de refatoração focado em modularização e organização de dados. O catálogo foi estruturado utilizando listas de dicionários chave-valor, permitindo manipular as informações ecológicas de forma limpa, segura e escalável.
+Nesta versão, a aplicação passou por um processo de refatoração focado em modularização e organização de dados. O catálogo foi estruturado utilizando listas de dicionários chave-valor, permitindo manipular as informações ecológicas de forma limpa, segura e escalável. 
+
+Além disso, as interações de terminal foram refatoradas criando funções auxiliares dedicadas (como `mensagem_sucesso()` e `mensagem_aviso()`), padronizando o feedback visual das ações executadas pelo usuário.
 
 ## Testes Manuais Realizados
 
@@ -24,6 +27,7 @@ Nesta versão, a aplicação passou por um processo de refatoração focado em m
 - [x] Consulta de detalhes por ID existente
 - [x] Consulta por ID inexistente ou fora do catálogo
 - [x] Tratamento de opção inválida no menu principal
+- [x] Exibição padronizada de mensagens de confirmação e sucesso no console
 - [x] Encerramento correto e seguro do programa
 
 ### Módulo 2 — Sistema de Busca e Normalização
@@ -56,6 +60,7 @@ Nesta versão, a aplicação passou por um processo de refatoração focado em m
 - [x] Comparar duas aves
 - [x] Tratar ID inexistente
 - [x] Tratar opção inválida no menu
+- [x] Exibir mensagens de sucesso e aviso padronizadas
 - [x] Encerrar o programa
 
 

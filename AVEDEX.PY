@@ -58,6 +58,11 @@ def mensagem_aviso(texto):
     print(f"[AVISO] {texto}")
 
 
+def mensagem_sucesso(texto):
+    # Exibe uma mensagem de sucesso ou confirmação.
+    print(f"[OK] {texto}")
+
+
 def normalizar_texto(texto):
     # Converte para texto.
     texto = str(texto)
@@ -415,10 +420,10 @@ while opcao_menu != "0":
         comparar_duas_aves(catalogo_aves)
     elif opcao_menu == "5":
         titulo("SOBRE A AVEDEX")
-        print("A AveDex é um catálogo interativo de aves.")
+        mensagem_sucesso("A AveDex é um catálogo interativo de aves.")
         print("Em breve, teremos batalha, imagens, sons e dados em arquivo JSON.")
     elif opcao_menu == "0":
-        print("Encerrando a AveDex. Até logo!")
+        mensagem_sucesso("Encerrando a AveDex. Até logo!")
     else:
         mensagem_aviso("Opção inválida. Digite apenas 0, 1, 2, 3, 4 ou 5.")
 
