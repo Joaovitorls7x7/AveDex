@@ -48,6 +48,8 @@ Nesta versão, a aplicação passou por um processo de refatoração focado em m
 ## Fontes dos Dados
 - WikiAves (Carcará): https://www.wikiaves.com.br/wiki/carcara
 - WikiAves (Ararinha-azul): https://www.wikiaves.com.br/wiki/ararinha-azul
+- WikiAves (Tucano-toco): https://www.wikiaves.com.br/wiki/tucano-toco
+- WikiAves (Uirapuru-verdadeiro): https://www.wikiaves.com.br/wiki/uirapuru-verdadeiro
 
 ## Como Executar
 ```bash
