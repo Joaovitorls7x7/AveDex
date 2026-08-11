@@ -375,7 +375,7 @@ catalogo_aves = [
         "curiosidade": "Seu grande bico ajuda a regular a temperatura do seu corpo."
     },
     {
-        "id": 7
+        "id": 7,
         "nome_popular": "Uirapuru-verdadeiro",
         "nome_cientifico": "Cyphorhinus arada",
         "ordem": "Passeriformes",
