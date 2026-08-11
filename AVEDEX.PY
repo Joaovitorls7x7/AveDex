@@ -4,22 +4,10 @@ import unicodedata
 # 1. FUNÇÕES DE UTILITÁRIOS E NORMALIZAÇÃO
 # ==========================================
 
-
-def valor_ou_indisponivel(valor, unidade=""):
-    if valor is None or valor == "":
-        return "Não informado"
-    
-    if unidade != "":
-        return f"{valor} {unidade}"
-    
-    return str(valor)
-
-
-
 def normalizar_texto(texto):
     """
     Remove acentos, converte o texto para minúsculas e remove espaços extras.
-    Isso permite buscar 'canário' digitando 'canario', por exemplo.
+    Permite buscar 'canário' digitando 'canario', por exemplo.
     """
     texto = str(texto)
     texto = texto.lower().strip()
@@ -43,8 +31,19 @@ def pausar():
     input("\nPressione ENTER para voltar ao menu...")
 
 
+def valor_ou_indisponivel(valor, unidade=""):
+    """Formatador de valores numéricos para exibição com unidade de medida ou 'Não informado'."""
+    if valor is None or valor == "":
+        return "Não informado"
+    
+    if unidade != "":
+        return f"{valor} {unidade}"
+    
+    return str(valor)
+
+
 # ==========================================
-# 2. FUNÇÕES DE BUSCA E EXIBIÇÃO DE DADOS
+# 2. FUNÇÕES DE BUSCA E LISTAGEM DE DADOS
 # ==========================================
 
 def buscar_aves(catalogo, termo_busca):
@@ -56,7 +55,6 @@ def buscar_aves(catalogo, termo_busca):
     termo = normalizar_texto(termo_busca)
     
     for ave in catalogo:
-        # Reúne os campos selecionados para a busca
         campos_busca = [
             ave.get("nome_popular", ""),
             ave.get("nome_cientifico", ""),
@@ -65,10 +63,8 @@ def buscar_aves(catalogo, termo_busca):
             ave.get("dieta_tipo", "")
         ]
         
-        # Junta todos os campos em uma única string e normaliza
         texto_busca = normalizar_texto(" ".join(campos_busca))
         
-        # Se o termo procurado estiver dentro do texto da ave, adiciona aos resultados
         if termo in texto_busca:
             resultados.append(ave)
             
@@ -76,7 +72,7 @@ def buscar_aves(catalogo, termo_busca):
 
 
 def buscar_ave_por_codigo(catalogo, codigo_procurado):
-    """Procura uma ave específica dentro de uma lista utilizando o seu ID/código."""
+    """Procura uma ave específica dentro do catálogo utilizando o seu ID/código."""
     for ave in catalogo:
         if str(ave["id"]) == str(codigo_procurado):
             return ave
@@ -92,6 +88,10 @@ def listar_aves(catalogo):
     for ave in catalogo:
         print(f"{ave['id']} - {ave['nome_popular']}")
 
+
+# ==========================================
+# 3. FUNÇÕES DE EXIBIÇÃO E COMPARAÇÃO
+# ==========================================
 
 def exibir_detalhes(ave):
     """Exibe na tela todas as informações detalhadas de uma única ave."""
@@ -126,12 +126,110 @@ def exibir_resultados_busca(resultados):
             )
 
 
+def imprimir_linha_comparacao(rotulo, valor_1, valor_2):
+    """Imprime uma linha formatada para alinhar os dados lado a lado como em uma tabela."""
+    print(f"{rotulo:<18} | {str(valor_1):<25} | {str(valor_2):<25}")
+
+
+def exibir_comparacao_aves(ave_1, ave_2):
+    """Gera uma tabela visual comparando todos os atributos de duas aves selecionadas."""
+    print()
+    print("=" * 78)
+    print("COMPARAÇÃO ENTRE AVES")
+    print("=" * 78)
+    
+    imprimir_linha_comparacao(
+        "Campo",
+        ave_1["nome_popular"],
+        ave_2["nome_popular"]
+    )
+    print("-" * 78)
+    
+    imprimir_linha_comparacao(
+        "Nome científico",
+        ave_1.get("nome_cientifico"),
+        ave_2.get("nome_cientifico")
+    )
+    imprimir_linha_comparacao(
+        "Ordem",
+        ave_1.get("ordem"),
+        ave_2.get("ordem")
+    )
+    imprimir_linha_comparacao(
+        "Família",
+        ave_1.get("familia"),
+        ave_2.get("familia")
+    )
+    imprimir_linha_comparacao(
+        "Dieta",
+        ave_1.get("dieta_tipo"),
+        ave_2.get("dieta_tipo")
+    )
+    imprimir_linha_comparacao(
+        "Habitat",
+        ave_1.get("habitat"),
+        ave_2.get("habitat")
+    )
+    imprimir_linha_comparacao(
+        "Comprimento",
+        valor_ou_indisponivel(ave_1.get("comprimento_cm"), "cm"),
+        valor_ou_indisponivel(ave_2.get("comprimento_cm"), "cm")
+    )
+    imprimir_linha_comparacao(
+        "Peso",
+        valor_ou_indisponivel(ave_1.get("peso_g"), "g"),
+        valor_ou_indisponivel(ave_2.get("peso_g"), "g")
+    )
+    imprimir_linha_comparacao(
+        "Conservação",
+        ave_1.get("status_conservacao", "Não informado"),
+        ave_2.get("status_conservacao", "Não informado")
+    )
+    imprimir_linha_comparacao(
+        "Índice",
+        ave_1.get("indice_conservacao", "Não informado"),
+        ave_2.get("indice_conservacao", "Não informado")
+    )
+
+
+def escolher_ave(catalogo, mensagem):
+    """Exibe o catálogo e solicita um ID ao usuário, retornando o dicionário da ave."""
+    listar_aves(catalogo)
+    id_escolhido = input(f"\n{mensagem}: ").strip()
+    
+    # Corrigido de buscar_ave_por_id para buscar_ave_por_codigo
+    ave_encontrada = buscar_ave_por_codigo(catalogo, id_escolhido)
+    
+    if ave_encontrada is None:
+        print("Ave não encontrada. Confira o ID informado.")
+        return None
+        
+    return ave_encontrada
+
+
+def comparar_duas_aves(catalogo):
+    """Orquestra a seleção de duas aves e invoca a tela de comparação."""
+    print()
+    print("Escolha a primeira ave")
+    ave_1 = escolher_ave(catalogo, "Digite o ID da primeira ave")
+    if ave_1 is None:
+        return
+
+    print()
+    print("Escolha a segunda ave")
+    ave_2 = escolher_ave(catalogo, "Digite o ID da segunda ave")
+    if ave_2 is None:
+        return
+
+    exibir_comparacao_aves(ave_1, ave_2)
+
+
 # ==========================================
-# 3. INTERFACE E NAVEGAÇÃO DE TELAS
+# 4. INTERFACE E NAVEGAÇÃO DE TELAS
 # ==========================================
 
 def exibir_menu():
-    """Exibe o menu principal com o cabeçalho e as opções atualizadas."""
+    """Exibe o menu principal com todas as opções ativas."""
     print()
     print("=" * 50)
     print("AVEDEX - MENU PRINCIPAL")
@@ -139,15 +237,13 @@ def exibir_menu():
     print("1 - Listar aves")
     print("2 - Buscar ave")
     print("3 - Ver detalhes de uma ave")
-    print("4 - Sobre a AveDex")
+    print("4 - Comparar duas aves")
+    print("5 - Sobre a AveDex")
     print("0 - Sair")
 
 
 def selecionar_ave_por_id(catalogo):
-    """
-    Função auxiliar para a Opção 3 do menu:
-    Lista as aves disponíveis, pede o ID ao usuário e exibe os detalhes.
-    """
+    """Opção 3 do menu: Solicita um ID e exibe a ficha completa da ave."""
     listar_aves(catalogo)
     codigo_escolhido = input("\nDigite o ID/código da ave para ver detalhes: ").strip()
     ave_encontrada = buscar_ave_por_codigo(catalogo, codigo_escolhido)
@@ -159,10 +255,7 @@ def selecionar_ave_por_id(catalogo):
 
 
 def tela_busca(catalogo):
-    """
-    Gerencia a tela de pesquisa: pede o termo, faz a busca,
-    exibe os resultados e permite abrir o detalhamento direto pelo ID.
-    """
+    """Gerencia a busca por palavras-chave e navegação para detalhes."""
     termo = input("Digite parte do nome, família, ordem ou dieta: ").strip()
     
     if termo == "":
@@ -172,7 +265,6 @@ def tela_busca(catalogo):
     resultados = buscar_aves(catalogo, termo)
     exibir_resultados_busca(resultados)
     
-    # Se houver resultados, oferece a opção de abrir os detalhes diretamente
     if len(resultados) > 0:
         escolha = input("\nDigite o ID para ver detalhes ou ENTER para voltar: ").strip()
         if escolha != "":
@@ -184,32 +276,22 @@ def tela_busca(catalogo):
 
 
 # ==========================================
-# 4. BASE DE DADOS (CATÁLOGO EM MEMÓRIA)
+# 5. BASE DE DADOS (CATÁLOGO EM MEMÓRIA)
 # ==========================================
 
-# Estrutura de dados contendo o banco de informações das aves (Lista de Dicionários)
 catalogo_aves = [
     {
-        # ID único da ave.
         "id": 1,
-        # Nomes da ave.
         "nome_popular": "Bem-te-vi",
         "nome_cientifico": "Pitangus sulphuratus",
-        # Classificação.
         "ordem": "Passeriformes",
         "familia": "Tyrannidae",
-        # Tipo principal de dieta.
         "dieta_tipo": "Onívora",
-        # Ambiente onde a ave costuma viver.
         "habitat": "Áreas abertas, cidades e bordas de florestas",
-        # Medidas aproximadas usadas na comparação.
         "comprimento_cm": 23,
         "peso_g": 68,
-        # Situação de conservação.
         "status_conservacao": "Pouco preocupante",
-        # Índice numérico útil para a mecânica de jogo/batalha.
         "indice_conservacao": 1,
-        # Outros detalhes.
         "alimentacao": "Insetos, frutos e pequenos animais",
         "curiosidade": "Seu canto parece dizer o próprio nome."
     },
@@ -269,51 +351,50 @@ catalogo_aves = [
         "comprimento_cm": 57,
         "peso_g": 300,
         "status_conservacao": "Extinta na natureza",
-        "indice_conservacao": 5,  # Índice elevado devido ao risco máximo
+        "indice_conservacao": 5,
         "alimentacao": "Frutos e sementes.",
         "curiosidade": "Infelizmente devido a destruição da Caatinga, atualmente a espécie é considerada extinta da natureza."
     }
 ]
 
 
-
 # ==========================================
-# 5. FLUXO PRINCIPAL DO PROGRAMA
+# 6. FLUXO PRINCIPAL DO PROGRAMA
 # ==========================================
 
-# Mensagem inicial ao abrir o programa
-exibir_linha()
-print("                    AVEDEX")
-exibir_linha()
+if __name__ == "__main__":
+    exibir_linha()
+    print("                    AVEDEX")
+    exibir_linha()
 
-opcao_menu = ""
+    opcao_menu = ""
 
-# Laço principal que mantém o menu ativo até que a opção "0" seja digitada
-while opcao_menu != "0":
-    exibir_menu() 
-    opcao_menu = input("Escolha uma opção: ").strip()
-    print()
-    
-    # Processa a opção informada pelo usuário
-    if opcao_menu == "1":
-        listar_aves(catalogo_aves)
+    while opcao_menu != "0":
+        exibir_menu() 
+        opcao_menu = input("Escolha uma opção: ").strip()
+        print()
         
-    elif opcao_menu == "2":
-        tela_busca(catalogo_aves)
-        
-    elif opcao_menu == "3":
-        selecionar_ave_por_id(catalogo_aves)
-        
-    elif opcao_menu == "4":
-        print("A AveDex é um catálogo interativo de aves.")
-        print("Em breve, teremos comparação, imagens, sons e dados em arquivo JSON.")
-        
-    elif opcao_menu == "0":
-        print("Encerrando a AveDex. Até logo!")
-        
-    else:
-        print("Opção inválida. Digite apenas 0, 1, 2, 3 ou 4.")
-        
-    # Se o usuário não escolheu sair, faz uma pausa antes de redesenhar o menu
-    if opcao_menu != "0":
-        pausar()
+        if opcao_menu == "1":
+            listar_aves(catalogo_aves)
+            
+        elif opcao_menu == "2":
+            tela_busca(catalogo_aves)
+            
+        elif opcao_menu == "3":
+            selecionar_ave_por_id(catalogo_aves)
+            
+        elif opcao_menu == "4":
+            comparar_duas_aves(catalogo_aves)
+            
+        elif opcao_menu == "5":
+            print("A AveDex é um catálogo interativo de aves.")
+            print("Desenvolvido para consulta taxonômica e comparação de espécies.")
+            
+        elif opcao_menu == "0":
+            print("Encerrando a AveDex. Até logo!")
+            
+        else:
+            print("Opção inválida. Digite apenas 0, 1, 2, 3, 4 ou 5.")
+            
+        if opcao_menu != "0":
+            pausar()
