@@ -4,6 +4,48 @@ import unicodedata  # Biblioteca padrão usada para manipular e remover acentos 
 # FUNÇÕES UTILITÁRIAS E DE TRATAMENTO DE TEXTO
 # ==========================================
 
+
+# ==========================================
+# CONSTANTES DE CONFIGURAÇÃO DO SISTEMA
+# ==========================================
+
+# Largura usada em títulos e linhas de separação.
+LARGURA_TELA = 78
+
+# Lista com as opções exibidas no menu principal.
+OPCOES_MENU = [
+    "1 - Listar aves",
+    "2 - Buscar ave",
+    "3 - Ver detalhes de uma ave",
+    "4 - Comparar duas aves",
+    "5 - Sobre a AveDex",
+    "0 - Sair"
+]
+
+# Campos usados na busca textual.
+CAMPOS_BUSCA = [
+    "nome_popular",
+    "nome_cientifico",
+    "familia",
+    "ordem",
+    "dieta_tipo"
+]
+
+# Campos exibidos na comparação.
+# Cada item possui: rótulo na tela, chave do dicionário e unidade.
+CAMPOS_COMPARACAO = [
+    ("Nome científico", "nome_cientifico", ""),
+    ("Ordem", "ordem", ""),
+    ("Família", "familia", ""),
+    ("Dieta", "dieta_tipo", ""),
+    ("Habitat", "habitat", ""),
+    ("Comprimento", "comprimento_cm", "cm"),
+    ("Peso", "peso_g", "g"),
+    ("Conservação", "status_conservacao", ""),
+    ("Índice", "indice_conservacao", "")
+]
+
+
 def normalizar_texto(texto):
     """
     Remove acentos, converte para minúsculas e remove espaços extras das pontas.
