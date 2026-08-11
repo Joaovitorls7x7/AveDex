@@ -110,19 +110,12 @@ def valor_ou_indisponivel(valor, unidade=""):
 # ==========================================
 
 def exibir_menu():
-    """
-    Imprime na tela o cabeçalho estilizado e a lista numerada com todas as opções do sistema.
-    """
-    print()
-    print("=" * 50)
-    print("AVEDEX - MENU PRINCIPAL")
-    print("=" * 50)
-    print("1 - Listar aves")
-    print("2 - Buscar ave")
-    print("3 - Ver detalhes de uma ave")
-    print("4 - Comparar duas aves")
-    print("5 - Sobre a AveDex")
-    print("0 - Sair")
+    # Exibe o título do menu.
+    titulo("AVEDEX - MENU PRINCIPAL")
+
+    # Percorre a lista de opções e imprime uma por uma.
+    for opcao in OPCOES_MENU:
+        print(opcao)
 
 
 def listar_aves(catalogo):
