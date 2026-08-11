@@ -358,6 +358,36 @@ catalogo_aves = [
         "indice_conservacao": 5,
         "alimentacao": "Frutos e sementes.",
         "curiosidade": "Infelizmente devido a destruição da Caatinga, atualmente a espécie é considerada extinta da natureza."
+    },
+    {
+        "id": 6,
+        "nome_popular": "Tucano-toco",
+        "nome_cientifico": "Ramphastos toco",
+        "ordem": "Piciformes",
+        "familia": "Ramphastidae",
+        "dieta_tipo": "Frugívora",
+        "habitat": "Florestas tropicais, cerrado e áreas abertas.",
+        "comprimento_cm": 56,
+        "peso_g": 540,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
+        "alimentacao": "Frutas, insetos, ovos e filhotes de outras aves",
+        "curiosidade": "Seu grande bico ajuda a regular a temperatura do seu corpo."
+    },
+    {
+        "id": 7
+        "nome_popular": "Uirapuru-verdadeiro",
+        "nome_cientifico": "Cyphorhinus arada",
+        "ordem": "Passeriformes",
+        "familia": "Troglodytidae",
+        "dieta_tipo": "Insetívora",
+        "habitat": "Floresta de terra firme na Amazônia",
+        "comprimento_cm": 12,
+        "peso_g": 20,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
+        "alimentacao": "Insetos, aranhas e pequenos invertebrados",
+        "curiosidade": "Famoso no folclore brasileiro por ter um dos cantos mais elaborados da Amazônia."
     }
 ]
 
