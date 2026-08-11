@@ -178,13 +178,26 @@ def tela_busca(catalogo):
 # Estrutura de dados contendo o banco de informações das aves (Lista de Dicionários)
 catalogo_aves = [
     {
+        # ID único da ave.
         "id": 1,
+        # Nomes da ave.
         "nome_popular": "Bem-te-vi",
         "nome_cientifico": "Pitangus sulphuratus",
+        # Classificação.
         "ordem": "Passeriformes",
         "familia": "Tyrannidae",
+        # Tipo principal de dieta.
         "dieta_tipo": "Onívora",
+        # Ambiente onde a ave costuma viver.
         "habitat": "Áreas abertas, cidades e bordas de florestas",
+        # Medidas aproximadas usadas na comparação.
+        "comprimento_cm": 23,
+        "peso_g": 68,
+        # Situação de conservação.
+        "status_conservacao": "Pouco preocupante",
+        # Índice numérico útil para a mecânica de jogo/batalha.
+        "indice_conservacao": 1,
+        # Outros detalhes.
         "alimentacao": "Insetos, frutos e pequenos animais",
         "curiosidade": "Seu canto parece dizer o próprio nome."
     },
@@ -196,6 +209,10 @@ catalogo_aves = [
         "familia": "Furnariidae",
         "dieta_tipo": "Insetívora",
         "habitat": "Campos, cidades e áreas rurais",
+        "comprimento_cm": 20,
+        "peso_g": 49,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Insetos e outros invertebrados",
         "curiosidade": "É conhecido por construir ninhos de barro."
     },
@@ -207,6 +224,10 @@ catalogo_aves = [
         "familia": "Thraupidae",
         "dieta_tipo": "Granívora",
         "habitat": "Campos e áreas abertas",
+        "comprimento_cm": 13,
+        "peso_g": 20,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Sementes e pequenos insetos",
         "curiosidade": "Possui canto forte e melodioso."
     },
@@ -218,6 +239,10 @@ catalogo_aves = [
         "familia": "Falconidae",
         "dieta_tipo": "Onívora / Necrófaga",
         "habitat": "Campos, cerrados, caatinga e áreas rurais.",
+        "comprimento_cm": 56,
+        "peso_g": 830,
+        "status_conservacao": "Pouco preocupante",
+        "indice_conservacao": 1,
         "alimentacao": "Animais vivos, carcaça, restos de lixo humano, insetos e frutos.",
         "curiosidade": "Alguns indivíduos da espécie podem nascer com plumagem leucística."
     },
@@ -229,6 +254,10 @@ catalogo_aves = [
         "familia": "Psittacidae",
         "dieta_tipo": "Granívora",
         "habitat": "Caatinga seca, florestas ciliares abertas.",
+        "comprimento_cm": 57,
+        "peso_g": 300,
+        "status_conservacao": "Extinta na natureza",
+        "indice_conservacao": 5,  # Índice elevado devido ao risco máximo
         "alimentacao": "Frutos e sementes.",
         "curiosidade": "Infelizmente devido a destruição da Caatinga, atualmente a espécie é considerada extinta da natureza."
     }
