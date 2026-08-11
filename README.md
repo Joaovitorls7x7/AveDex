@@ -11,6 +11,7 @@ O AveDex é um sistema em Python executado via linha de comando (CLI), projetado
 - Exibição de ficha técnica completa com dados biométricos (comprimento e peso), habitat, dieta, curiosidades e índice de conservação;
 - Tratamento de dados ausentes para evitar erros de exibição quando alguma informação biométrica não estiver preenchida;
 - Tabela comparativa lado a lado entre duas aves para análise direta de atributos taxonômicos e ecológicos;
+- Aviso em tela ao selecionar a mesma ave para ambos os lados na comparação;
 - Validação de entradas do usuário para evitar travamentos ao digitar IDs inexistentes ou buscas em branco.
 
 ## Evolução e Arquitetura do Projeto
@@ -41,7 +42,7 @@ Nesta versão, a aplicação passou por um processo de refatoração focado em m
 - [x] Comparação direta de dados biométricos (peso em gramas e comprimento em cm)
 - [x] Comparação de status e índice de conservação
 - [x] Validação de ID inexistente durante o fluxo de seleção para comparação
-- [x] Comparação de uma mesma ave com ela mesma
+- [x] Exibição de aviso para comparação de uma mesma ave com ela mesma
 - [x] Tratamento de opção inválida durante o fluxo do menu
 
 ## Fontes dos Dados
