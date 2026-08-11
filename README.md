@@ -45,6 +45,20 @@ Nesta versão, a aplicação passou por um processo de refatoração focado em m
 - [x] Exibição de aviso para comparação de uma mesma ave com ela mesma
 - [x] Tratamento de opção inválida durante o fluxo do menu
 
+
+## Testes de regressão
+- [ ] Listar aves
+- [ ] Buscar por parte do nome
+- [ ] Buscar por família
+- [ ] Buscar por ordem
+- [ ] Buscar por dieta
+- [ ] Ver detalhes por ID
+- [ ] Comparar duas aves
+- [ ] Tratar ID inexistente
+- [ ] Tratar opção inválida no menu
+- [ ] Encerrar o programa
+
+
 ## Fontes dos Dados
 - WikiAves (Carcará): https://www.wikiaves.com.br/wiki/carcara
 - WikiAves (Ararinha-azul): https://www.wikiaves.com.br/wiki/ararinha-azul
