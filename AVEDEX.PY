@@ -141,30 +141,37 @@ def buscar_ave_por_id(catalogo, id_procurado):
     return None
 
 
+def criar_texto_busca(ave):
+    # Lista temporária que guardará os valores dos campos pesquisáveis.
+    valores = []
+    # Percorre cada campo definido em CAMPOS_BUSCA.
+    for campo in CAMPOS_BUSCA:
+        # Busca o valor do campo no dicionário da ave.
+        # Se o campo não existir, usa texto vazio.
+        valores.append(str(ave.get(campo, "")))
+    # Junta todos os valores em um único texto.
+    texto = " ".join(valores)
+#    Normaliza o texto para facilitar a busca.
+    return normalizar_texto(texto)
+
+
+
+
 def buscar_aves(catalogo, termo_busca):
-    """
-    Busca por palavra-chave dentro do catálogo.
-    Pesquisa no Nome Popular, Nome Científico, Família, Ordem e Dieta da ave,
-    ignorando diferenças entre maiúsculas/minúsculas e acentuações.
-    """
+    # Lista que receberá as aves encontradas.
     resultados = []
+
+    # Normaliza o termo digitado pelo usuário.
     termo = normalizar_texto(termo_busca)
-    
+
+    # Percorre todas as aves.
     for ave in catalogo:
-        campos_busca = [
-            ave.get("nome_popular", ""),
-            ave.get("nome_cientifico", ""),
-            ave.get("familia", ""),
-            ave.get("ordem", ""),
-            ave.get("dieta_tipo", "")
-        ]
-        
-        texto_busca = " ".join(campos_busca)
-        texto_busca = normalizar_texto(texto_busca)
-        
+        # Cria o texto pesquisável da ave.
+        texto_busca = criar_texto_busca(ave)
+
+        # Se o termo estiver no texto, adiciona a ave aos resultados.
         if termo in texto_busca:
             resultados.append(ave)
-            
     return resultados
 
 
