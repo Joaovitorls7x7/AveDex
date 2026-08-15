@@ -37,11 +37,11 @@
       "alimentacao": "Insetos, frutos e pequenos animais.",
       "curiosidade": "Seu canto parece dizer o próprio nome.",
       "midia": {
-        "pagina_guia": null,
-        "fotografo": "",
-        "wikiaves_url": "",
-        "som_url": "",
-        "imagem_url": ""
+        "pagina_guia": 25,
+        "fotografo": "Wikimedia Commons",
+        "wikiaves_url": "https://www.wikiaves.com.br/wiki/bem-te-vi",
+        "som_url": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Pitangus_sulphuratus_-_Great_Kiskadee_XC165840.mp3",
+        "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/ thumb/2/22/Great_Kiskadee_%28Pitangus_sulphuratus%29.jpg/800px-Great_Kiskadee_%28Pitangus_sulphuratus%29.jpg"
       }
     },
     {
@@ -62,10 +62,10 @@
       "curiosidade": "O ninho de barro é uma de suas características mais marcantes.",
       "midia": {
         "pagina_guia": null,
-        "fotografo": "",
-        "wikiaves_url": "",
-        "som_url": "",
-        "imagem_url": ""
+        "fotografo": "Wikimedia Commons",
+        "wikiaves_url": "https://www.wikiaves.com.br/wiki/joao-de-barro",
+        "som_url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Furnarius_rufus_-_Rufous_Hornero_XC212134.mp3",
+        "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Furnarius_rufus_-_Rufous_hornero.jpg/800px-Furnarius_rufus_-_Rufous_hornero.jpg"
       }
     },
     {
@@ -86,10 +86,10 @@
       "curiosidade": "É bastante reconhecido pelo canto.",
       "midia": {
         "pagina_guia": null,
-        "fotografo": "",
-        "wikiaves_url": "",
+        "fotografo": "Wikimedia Commons",
+        "wikiaves_url": "https://www.wikiaves.com.br/wiki/canario-da-terra-verdadeiro",
         "som_url": "",
-        "imagem_url": ""
+        "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Sicalis_flaveola_-Saffron_Finch.jpg/800px-Sicalis_flaveola_-Saffron_Finch.jpg"
       }
     },
     {
@@ -110,10 +110,10 @@
       "curiosidade": "Alguns indivíduos da espécie podem nascer com plumagem leucística.",
       "midia": {
         "pagina_guia": null,
-        "fotografo": "",
+        "fotografo": "Wikimedia Commons",
         "wikiaves_url": "https://www.wikiaves.com.br/wiki/carcara",
         "som_url": "",
-        "imagem_url": ""
+        "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Southern_Crested-Caracara.jpg/800px-Southern_Crested-Caracara.jpg"
       }
     },
     {
@@ -134,10 +134,10 @@
       "curiosidade": "Infelizmente devido a destruição da Caatinga, atualmente a espécie é considerada extinta da natureza.",
       "midia": {
         "pagina_guia": null,
-        "fotografo": "",
+        "fotografo": "Wikimedia Commons",
         "wikiaves_url": "https://www.wikiaves.com.br/wiki/ararinha-azul",
         "som_url": "",
-        "imagem_url": ""
+        "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Cyanopsitta_spixii_-Pair_in_tree-8a.jpg/800px-Cyanopsitta_spixii_-Pair_in_tree-8a.jpg"
       }
     },
     {
@@ -158,10 +158,10 @@
       "curiosidade": "Seu grande bico ajuda a regular a temperatura do seu corpo.",
       "midia": {
         "pagina_guia": null,
-        "fotografo": "",
+        "fotografo": "Wikimedia Commons",
         "wikiaves_url": "https://www.wikiaves.com.br/wiki/tucano-toco",
         "som_url": "",
-        "imagem_url": ""
+        "imagem_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Ramphastos_toco_-Zoo_Amiens_France-8a.jpg/800px-Ramphastos_toco_-Zoo_Amiens_France-8a.jpg"
       }
     },
     {
@@ -178,7 +178,7 @@
       "indice_conservacao": 1,
       "descricao": "Pequena ave amazônica famosa por seu canto melodioso e lendário.",
       "habitat": "Floresta de terra firme na Amazônia.",
-      "alimentacao": "Insetos, aranhas e pequenos invertebrados.",
+      "alimentacao": "Insectos, aranhas e pequenos invertebrados.",
       "curiosidade": "Famoso no folclore brasileiro por ter um dos cantos mais elaborados da Amazônia.",
       "midia": {
         "pagina_guia": null,
