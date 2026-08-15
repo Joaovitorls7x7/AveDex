@@ -4,7 +4,7 @@ from src.avedex.creditos import mostrar_creditos
 from src.avedex.interface import abertura, exibir_menu_principal
 from src.avedex.dados import carregar_aves, validar_dataset
 from src.avedex.utils import pausar, mensagem_aviso
-
+from src.avedex.ambiente import verificar_ambiente
 
 def executar():
     # Carrega a lista de aves a partir do JSON.
@@ -51,6 +51,9 @@ def executar():
             pausar()
         elif opcao == "5":
             mostrar_creditos()
+            pausar()
+        elif opcao == "6":
+            verificar_ambiente()
             pausar()
         elif opcao == "0":
             print("Encerrando a AveDex. Até logo!")
