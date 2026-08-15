@@ -21,9 +21,9 @@
 - [ ] A comparação trata ID inexistente.
 
 ## Dados e ambiente
-- [ ] O JSON é carregado corretamente.
-- [ ] O programa identifica JSON ausente.
-- [ ] O programa identifica JSON mal formatado.
-- [ ] O programa identifica campo obrigatório ausente.
-- [ ] O programa identifica ID duplicado.
-- [ ] A opção 6 verifica o ambiente.
+- [x] O JSON é carregado corretamente.
+- [x] O programa identifica JSON ausente.
+- [x] O programa identifica JSON mal formatado.
+- [x] O programa identifica campo obrigatório ausente.
+- [x] O programa identifica ID duplicado.
+- [x] A opção 6 verifica o ambiente.

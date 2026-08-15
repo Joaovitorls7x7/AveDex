@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from src.avedex.utils import mensagem_erro
 
 
 # __file__ representa o caminho deste arquivo dados.py.
