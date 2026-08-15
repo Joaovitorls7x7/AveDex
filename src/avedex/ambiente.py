@@ -1,3 +1,5 @@
+"""Verificação das dependências opcionais usadas pela AveDex."""
+
 import importlib.util
 from src.avedex.utils import mensagem_aviso, mensagem_sucesso, titulo
 
@@ -9,11 +11,12 @@ BIBLIOTECAS = {
 
 
 def biblioteca_instalada(nome):
-    # find_spec retorna informação da biblioteca se ela estiver instalada.
+    """Informa se um módulo pode ser encontrado no ambiente Python."""
     return importlib.util.find_spec(nome) is not None
 
 
 def verificar_ambiente():
+    """Exibe a situação das bibliotecas usadas pelos recursos de mídia."""
     titulo("VERIFICAÇÃO DO AMBIENTE")
 
     for biblioteca, finalidade in BIBLIOTECAS.items():
@@ -23,5 +26,6 @@ def verificar_ambiente():
             mensagem_aviso(f"{biblioteca}: não instalada - {finalidade}")
 
     print()
-    print("Para instalar todas as dependências opcionais:")
-    print("pip install -r requirements.txt")
+    print("O núcleo da AveDex funciona sem essas bibliotecas.")
+    print("Imagem, som e download dependem delas.")
+    print("Para instalar: pip install -r requirements.txt")
